@@ -1,0 +1,21 @@
+{
+  "name": "~TODO~",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview"
+  },
+  "devDependencies": {
+    "@beyonk/svelte-mapbox": "^7.6.0",
+    "@supabase/supabase-js": "^1.8.0",
+    "@sveltejs/adapter-netlify": "^1.0.0-next.18",
+    "@sveltejs/kit": "next",
+    "svelte": "^3.34.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "encoding": "^0.1.13",
+    "which-country": "^1.0.0"
+  }
+}
