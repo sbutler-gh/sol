@@ -29,6 +29,8 @@
   // export let color = randomColour()
   export let popup = true;
 
+  export let impact;
+
   let feed;
   
   let marker
@@ -59,14 +61,14 @@
         popupEl.setDOMContent(elementPopup)
       } else {
         let popuphtml;
-        if (name) {
+        if (impact) {
         // popuphtml = "<strong>" + type + "</strong> <br>" + content;
         // popupEl.setHTML(`<strong>${type}</strong><br>${content}`)
-        popupEl.setHTML(`<strong>${name} + ${feed}</strong>`)
+        popupEl.setHTML(`<h3>${name}</h3><div style="background: #f9f9f9; border-radius: 5px; border: solid 1px lightgray; padding: 2px;"><p style="white-space: pre-line">${impact}</p></div>`)
         }
         else {
         // popupEl.setHTML(`<strong>type</strong><br>content`)
-        popupEl.setHTML(`<button>Create Campaign</button>`)
+        popupEl.setHTML(`<strong>${name}</strong>`)
 
 
         // popuphtml = "<strong>" + type + "</strong>";

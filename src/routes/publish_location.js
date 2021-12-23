@@ -19,7 +19,8 @@ export async function post(request) {
       lat: request.body.get('lat'),
       lng_lat: request.body.get('lng_lat'),
       // name: request.body.get('title'),
-      name: request.body.get('name')
+      name: request.body.get('name'),
+      impact: request.body.get('impact')
     //   geojson_feature: geojson_feature,
     //   geo_id: request.body.get('geo_id'),
     //   geo_index: 'osm',

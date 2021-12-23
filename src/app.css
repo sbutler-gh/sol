@@ -24,3 +24,8 @@
 /* Accessibility from perfectmotherfuckingwebsite */
 
 h1,h2,h3{line-height:1.2}
+
+.mapboxgl-popup {
+	max-width: 350px !important;
+	width: 100%;
+  }

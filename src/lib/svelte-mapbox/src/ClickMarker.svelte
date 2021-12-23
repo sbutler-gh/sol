@@ -3,6 +3,7 @@
   import { getContext } from 'svelte'
   import { createEventDispatcher } from 'svelte';
   import { contextKey } from './mapbox.js'
+  import '../../../app.css';
 
   const { getMap, getMapbox } = getContext(contextKey)
   const map = getMap()
@@ -27,6 +28,13 @@
   // export let color = randomColour()
   export let popup = true
   
+  let impact = `💧 X liters of groundwater
+🏭 X tons of CO2
+📜 years of culture
+🏞️ ancestral lands
+🤝🏽 Treaties
+💲 $XXX,XXX,XXX taxpayer dollars
+❗ Other important factors`
   let marker
   let element
   let elementPopup
@@ -74,7 +82,8 @@
   function createCampaign(e) {
     console.log(e.target);
     dispatch('campaign', {
-			name: campaign_name
+			name: campaign_name,
+      impact: impact
 		});
   }
 </script>
@@ -87,13 +96,31 @@
 <slot></slot>
 </div>
 
-<div class='popup' bind:this={elementPopup}>
+<div class='popup' style="max-width: 350px;" bind:this={elementPopup}>
   <slot name="popup"></slot>
   <form on:submit|preventDefault={createCampaign} style="background: white;">
+    <label>Campaign Name</label>
     <input bind:value={campaign_name} placeholder="Campaign Name">
-    <button type="submit">Create Campaign</button>
+    <label>What's at stake in this campaign?</label>
+    <label><em>You can edit the metrics below, copy+paste in <a href="https://emojipedia.org/heavy-dollar-sign/">your own emojis</a>, or overwrite this section with any other kind of content.</em></label>
+    <textarea bind:value={impact}></textarea>
+    <button type="submit">Publish Campaign to Map</button>
   </form>
 </div>
 
 <style>
+  input, textarea, label {
+    display: block;
+  }
+  input, textarea {
+    margin-bottom: 10px;
+    width: 95%;
+  }
+
+  textarea {
+    height: 100px;
+  }
+  .mapboxgl-popup {
+  max-width: 350px !important;
+}
 </style>

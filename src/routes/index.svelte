@@ -6,6 +6,7 @@
       import LoadingSpinner from '$lib/LoadingSpinner.svelte';
       import wc from 'which-country';
 import variables from '$lib/variables';
+import '../app.css';
 
 
       export let sites;
@@ -133,6 +134,7 @@ async function publishSite(e) {
 var formData = new FormData();
 
 formData.append('name', e.detail.name);
+formData.append('impact', e.detail.impact);
 formData.append('lng', lng);
 formData.append('lat', lat);
 formData.append('lng_lat', JSON.stringify({lng, lat}));
@@ -228,7 +230,7 @@ function handleMessage(event) {
       on:click={handleMapClick}
       bind:zoom
       style={style}
-      projection={projection}
+      options={{ projection: 'naturalEarth' }}
     >
     <!-- on:click={e => { console.log(e.detail); lng = e.detail.lng; lat = e.detail.lat; if (zoom < 10) { zoom = 17; }} } -->
 
@@ -243,7 +245,7 @@ function handleMessage(event) {
 
     {#if sites}
     {#each sites as site}
-      <Marker twitter_id={site.twitter_id} lng={site.lng} lat={site.lat} name={site.name} color="blue">
+      <Marker twitter_id={site.twitter_id} impact={site.impact} lng={site.lng} lat={site.lat} name={site.name} color="blue">
         <div style="font-size: 18px;">
           🔴
           <!-- {#if site.type == "plant_here"}
@@ -392,5 +394,9 @@ function handleMessage(event) {
   background: black;
   z-index: 100;
   color: white;
+}
+
+.mapboxgl-popup {
+  max-width: 350px !important;
 }
 </style>

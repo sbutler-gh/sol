@@ -38,7 +38,8 @@
   export let options = {}
   export let accessToken
   export let customStylesheetUrl = false
-  export let style = 'mapbox://styles/mapbox/streets-v11'
+  export let style = 'mapbox://styles/mapbox/streets-v11';
+  export let projection = 'naturalEarth';
 
   export function fitBounds (bbox, options = {}) {
     queue.send('fitBounds', [ bbox, options ])
@@ -78,13 +79,18 @@
     const optionsWithDefaults = Object.assign({
       container,
       style,
+      projection,
       center,
       zoom,
       zoomRate,
       wheelZoomRate
     }, options)
 
+    // mapbox.setProjection('naturalEarth');
+
     const el = new mapbox.Map(optionsWithDefaults)
+
+    // el.setProjection('naturalEarth');
 
     el.on('dragend', () => {
       const { lng, lat } = el.getCenter()
