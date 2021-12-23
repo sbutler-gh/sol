@@ -22,6 +22,7 @@ import variables from '$lib/variables';
       // $: style = 'mapbox://styles/mapbox/streets-v11'
       // $: style = 'mapbox://styles/mapbox/outdoors-v11'
       $: style = 'mapbox://styles/mapbox/satellite-v9'
+      $: projection = 'naturalEarth'
       // $: style = 'mapbox://styles/mapbox/satellite-streets-v11'
       let menu_display = "plant";
 
@@ -227,6 +228,7 @@ function handleMessage(event) {
       on:click={handleMapClick}
       bind:zoom
       style={style}
+      projection={projection}
     >
     <!-- on:click={e => { console.log(e.detail); lng = e.detail.lng; lat = e.detail.lat; if (zoom < 10) { zoom = 17; }} } -->
 
@@ -241,7 +243,7 @@ function handleMessage(event) {
 
     {#if sites}
     {#each sites as site}
-      <Marker lng={site.lng} lat={site.lat} name={site.name} color="blue">
+      <Marker twitter_id={site.twitter_id} lng={site.lng} lat={site.lat} name={site.name} color="blue">
         <div style="font-size: 18px;">
           🔴
           <!-- {#if site.type == "plant_here"}

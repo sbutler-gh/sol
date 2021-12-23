@@ -25,16 +25,25 @@
   export let markerOffset = [ 0, 0 ]
   export let popupOffset = 10
   export let color
+  export let twitter_id;
   // export let color = randomColour()
-  export let popup = true
+  export let popup = true;
+
+  let feed;
   
   let marker
   let element
   let elementPopup
 
+
   $: marker && move(lng, lat)
 
   onMount(() => {
+    
+    // if (twitter_id) {
+    //   fetchTweets();
+    // }
+
     if (element.hasChildNodes()) {
       marker = new mapbox.Marker({ element, offset: markerOffset })
     } else {
@@ -53,7 +62,7 @@
         if (name) {
         // popuphtml = "<strong>" + type + "</strong> <br>" + content;
         // popupEl.setHTML(`<strong>${type}</strong><br>${content}`)
-        popupEl.setHTML(`<strong>${name}</strong>`)
+        popupEl.setHTML(`<strong>${name} + ${feed}</strong>`)
         }
         else {
         // popupEl.setHTML(`<strong>type</strong><br>content`)
@@ -77,6 +86,28 @@
 
   export function getMarker () {
     return marker
+  }
+
+  async function fetchTweets() {
+    // let response = await fetch(`https://serene-journey-42564.herokuapp.com/https://api.twitter.com/2/users/${twitter_id}/tweets?expansions=attachments.poll_ids,attachments.media_keys,author_id,entities.mentions.username,geo.place_id,in_reply_to_user_id,referenced_tweets.id,referenced_tweets.id.author_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&poll.fields=duration_minutes,end_datetime,id,options,voting_status&media.fields=duration_ms,height,media_key,preview_image_url,type,url,width,public_metrics,non_public_metrics,organic_metrics`, {
+      let response = await fetch(`https://serene-journey-42564.herokuapp.com/https://api.twitter.com/2/users/${twitter_id}/tweets`, {
+
+      method: 'get',
+      headers: {
+        "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAEQ8XQEAAAAAYJQPZrtLjRoiS2kRb4MKQ4jzK8I%3Dbk9tNtnp3gUWRcWTOAn6z3ujZWK29lXzLvamqOh82sRCnuq544"
+      }
+    })
+
+    // expansions=attachments.poll_ids,attachments.media_keys,author_id,entities.mentions.username,geo.place_id,in_reply_to_user_id,referenced_tweets.id,referenced_tweets.id.author_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&poll.fields=duration_minutes,end_datetime,id,options,voting_status&media.fields=duration_ms,height,media_key,preview_image_url,type,url,width,public_metrics,non_public_metrics,organic_metrics,promoted_metric
+
+    if (response) {
+      let data = await response.json();
+      console.log(data);
+    }
+
+    else {
+      console.log(error);
+    }
   }
 </script>
 
