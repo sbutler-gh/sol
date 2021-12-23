@@ -94,7 +94,7 @@
 
       method: 'get',
       headers: {
-        "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAEQ8XQEAAAAAYJQPZrtLjRoiS2kRb4MKQ4jzK8I%3Dbk9tNtnp3gUWRcWTOAn6z3ujZWK29lXzLvamqOh82sRCnuq544"
+        "Authorization": `Bearer ${import.meta.env.VITE_TWITTER_BEARER_TOKEN}`
       }
     })
 
