@@ -176,6 +176,16 @@ function handleMessage(event) {
     console.log(event.detail.text);
 	}
 
+  function geocodeResult(e) {
+    console.log(e);
+    console.log(e.detail);
+
+    lng = e.detail.result.center[0]; 
+    lat = e.detail.result.center[1]; 
+    mapComponent.flyTo({center:[lng,lat], zoom: 15})
+    // mapComponent.setZoom(13);
+  }
+
 
 </script>
 
@@ -234,6 +244,7 @@ function handleMessage(event) {
     >
     <!-- on:click={e => { console.log(e.detail); lng = e.detail.lng; lat = e.detail.lat; if (zoom < 10) { zoom = 17; }} } -->
 
+    <Geocoder accessToken={variables.mapboxAccessToken} on:result={geocodeResult} />
     <div>
     {#if display_my_location == true}
     <ClickMarker lat={lat} lng={lng} color="skyblue" on:campaign={publishSite}>
